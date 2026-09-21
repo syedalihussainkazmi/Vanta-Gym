@@ -30,6 +30,8 @@ export function Recovery() {
                 src={offering.image.src(900, 1100)}
                 alt={offering.label}
                 wrapperClassName="aspect-[4/5] w-full"
+                hoverScale={0.06}
+                cursorLabel={offering.label}
               />
               <h3 className="mt-5 font-display text-xl font-bold uppercase text-vanta-white">
                 {offering.label}

@@ -1,11 +1,22 @@
 import { useEffect, useRef } from 'react'
 import { images } from '@/data/images'
+import { trainingCategories } from '@/data/content'
 import { Image } from '@/components/ui/Image'
 import { RevealText } from '@/components/ui/RevealText'
+import { RevealFade } from '@/components/ui/RevealFade'
 import { Button } from '@/components/ui/Button'
+import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
+import { BarbellIcon, BoltIcon, KettlebellIcon, PulseIcon } from '@/components/ui/GymIcons'
 import { useSmoothScroll } from '@/lib/SmoothScroll'
 import { gsap } from '@/lib/gsap'
 import { useReducedMotion } from '@/lib/useReducedMotion'
+
+const disciplineIcons = {
+  strength: BarbellIcon,
+  conditioning: PulseIcon,
+  performance: BoltIcon,
+  recovery: KettlebellIcon,
+} as const
 
 export function Hero() {
   const { scrollTo } = useSmoothScroll()
@@ -34,7 +45,7 @@ export function Hero() {
     <section
       id="top"
       aria-label="Introduction"
-      className="relative flex h-[100svh] min-h-[640px] w-full flex-col justify-between overflow-hidden bg-vanta-black"
+      className="relative flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-vanta-black"
     >
       <div ref={bgRef} className="absolute inset-0 will-change-transform">
         <Image
@@ -51,7 +62,18 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 z-10 bg-vanta-black"
       />
 
-      <div className="container-vanta relative z-20 flex flex-1 flex-col justify-between pb-10 pt-32 md:pb-14 md:pt-40">
+      <AnimatedBackground className="z-[11] mix-blend-screen opacity-70" />
+
+      <BarbellIcon
+        aria-hidden="true"
+        className="vanta-float-a pointer-events-none absolute right-[6%] top-32 z-[12] hidden w-40 -rotate-12 text-vanta-ember/25 md:top-36 md:block lg:w-56"
+      />
+      <KettlebellIcon
+        aria-hidden="true"
+        className="vanta-float-c pointer-events-none absolute left-[7%] top-28 z-[12] hidden w-10 text-vanta-fog/20 md:top-32 md:block"
+      />
+
+      <div className="container-vanta relative z-20 flex flex-1 flex-col justify-between pb-8 pt-32 md:pb-10 md:pt-40">
         <p className="font-mono text-[11px] uppercase tracking-widest2 text-vanta-fog">
           <RevealText lines={['Vanta — Performance Club']} delay={0.6} />
         </p>
@@ -75,15 +97,29 @@ export function Hero() {
             </Button>
           </div>
         </div>
-      </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex justify-center md:bottom-8">
-        <div className="flex flex-col items-center gap-3 text-vanta-fog">
-          <span className="font-mono text-[10px] uppercase tracking-widest2">Scroll</span>
-          <span className="relative block h-12 w-px overflow-hidden bg-vanta-steel/50">
-            <span className="scroll-cue-line absolute inset-x-0 top-0 h-full bg-vanta-white" />
-          </span>
-        </div>
+        <RevealFade delay={0.9} start="top 100%">
+          <div className="flex flex-col gap-6 border-t border-vanta-fog/15 pt-5 sm:flex-row sm:items-center sm:justify-between">
+            <ul className="flex flex-wrap gap-x-8 gap-y-3">
+              {trainingCategories.map((cat) => {
+                const Icon = disciplineIcons[cat.key]
+                return (
+                  <li key={cat.key} className="flex items-center gap-2.5 text-vanta-fog">
+                    <Icon className="h-4 w-4 shrink-0 text-vanta-ember" />
+                    <span className="font-mono text-[10px] uppercase tracking-widest2">{cat.label}</span>
+                  </li>
+                )
+              })}
+            </ul>
+
+            <div className="flex items-center gap-3 text-vanta-fog">
+              <span className="font-mono text-[10px] uppercase tracking-widest2">Scroll</span>
+              <span className="relative block h-8 w-px overflow-hidden bg-vanta-steel/50 sm:h-10">
+                <span className="scroll-cue-line absolute inset-x-0 top-0 h-full bg-vanta-white" />
+              </span>
+            </div>
+          </div>
+        </RevealFade>
       </div>
     </section>
   )

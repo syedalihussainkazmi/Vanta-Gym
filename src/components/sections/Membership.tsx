@@ -4,6 +4,7 @@ import { RevealFade } from '@/components/ui/RevealFade'
 import { RevealText } from '@/components/ui/RevealText'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { Button } from '@/components/ui/Button'
+import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
 import { useSmoothScroll } from '@/lib/SmoothScroll'
 import { useMembershipInterest } from '@/lib/MembershipInterest'
 
@@ -17,8 +18,9 @@ export function Membership() {
   }
 
   return (
-    <section id="membership" aria-label="Membership" className="relative bg-vanta-charcoal py-28 md:py-40">
-      <div className="container-vanta">
+    <section id="membership" aria-label="Membership" className="relative overflow-hidden bg-vanta-charcoal py-28 md:py-40">
+      <AnimatedBackground className="opacity-50" grain={false} />
+      <div className="container-vanta relative">
         <RevealFade>
           <SectionLabel index="08" title="Membership" />
         </RevealFade>
@@ -84,7 +86,7 @@ export function Membership() {
                   variant={tier.featured ? 'solid' : 'outline'}
                   className={clsx(
                     'mt-10 w-full justify-center',
-                    tier.featured && '!bg-vanta-black !text-vanta-white hover:!bg-vanta-ember',
+                    tier.featured && '!bg-vanta-black !text-vanta-white hover:!bg-vanta-ember hover:!text-vanta-black',
                   )}
                 >
                   Become a Member

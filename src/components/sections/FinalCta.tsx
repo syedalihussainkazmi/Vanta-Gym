@@ -3,6 +3,7 @@ import { Image } from '@/components/ui/Image'
 import { RevealText } from '@/components/ui/RevealText'
 import { RevealFade } from '@/components/ui/RevealFade'
 import { Button } from '@/components/ui/Button'
+import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
 import { useSmoothScroll } from '@/lib/SmoothScroll'
 
 export function FinalCta() {
@@ -22,6 +23,8 @@ export function FinalCta() {
           wrapperClassName="h-full w-full"
         />
       </div>
+
+      <AnimatedBackground className="z-[5] mix-blend-screen opacity-60" />
 
       <div className="container-vanta relative z-10 flex flex-col gap-10 pb-24 pt-40 md:flex-row md:items-end md:justify-between md:pb-32">
         <h2 className="font-display text-display-1 font-extrabold uppercase leading-[0.9] text-vanta-white">

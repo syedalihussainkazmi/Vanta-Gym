@@ -79,7 +79,7 @@ export function CursorProvider({ children }: { children: ReactNode }) {
       height: size,
       marginLeft: -size / 2,
       marginTop: -size / 2,
-      backgroundColor: variant === 'default' ? '#faf9f6' : '#faf9f6',
+      backgroundColor: variant === 'default' ? '#faf7ee' : '#faf7ee',
       duration: 0.35,
       ease: 'power3.out',
     })

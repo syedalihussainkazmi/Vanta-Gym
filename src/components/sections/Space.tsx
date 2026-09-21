@@ -39,6 +39,7 @@ export function Space() {
               alt={captions[3]}
               wrapperClassName="aspect-[16/11] w-full"
               parallax
+              hoverScale={0.06}
               parallaxAmount={40}
             />
             <p className="mt-3 font-mono text-[11px] uppercase tracking-widest2 text-vanta-mist">
@@ -51,6 +52,7 @@ export function Space() {
               alt={captions[0]}
               wrapperClassName="aspect-[4/5] w-full"
               parallax
+              hoverScale={0.06}
               parallaxAmount={70}
             />
             <p className="mt-3 font-mono text-[11px] uppercase tracking-widest2 text-vanta-mist">
@@ -64,6 +66,7 @@ export function Space() {
               alt={captions[1]}
               wrapperClassName="aspect-[4/5] w-full"
               parallax
+              hoverScale={0.06}
               parallaxAmount={50}
             />
             <p className="mt-3 font-mono text-[11px] uppercase tracking-widest2 text-vanta-mist">
@@ -76,6 +79,7 @@ export function Space() {
               alt={captions[4]}
               wrapperClassName="aspect-[16/10] w-full"
               parallax
+              hoverScale={0.06}
               parallaxAmount={35}
             />
             <p className="mt-3 font-mono text-[11px] uppercase tracking-widest2 text-vanta-mist">
@@ -89,6 +93,7 @@ export function Space() {
               alt={captions[2]}
               wrapperClassName="aspect-[6/7] w-full"
               parallax
+              hoverScale={0.06}
               parallaxAmount={45}
             />
             <p className="mt-3 font-mono text-[11px] uppercase tracking-widest2 text-vanta-mist">
@@ -101,6 +106,7 @@ export function Space() {
               alt={captions[5]}
               wrapperClassName="aspect-[6/7] w-full"
               parallax
+              hoverScale={0.06}
               parallaxAmount={60}
             />
             <p className="mt-3 font-mono text-[11px] uppercase tracking-widest2 text-vanta-mist">

@@ -14,15 +14,17 @@ export default {
     extend: {
       colors: {
         vanta: {
-          black: '#0a0a0b',
-          charcoal: '#151517',
-          graphite: '#232326',
-          steel: '#3d3d41',
-          mist: '#8a8a8f',
-          fog: '#c8c8cb',
-          bone: '#f2f0ec',
-          white: '#faf9f6',
-          ember: '#c94b2d',
+          black: '#10231a',
+          charcoal: '#1a2f22',
+          graphite: '#24402e',
+          steel: '#4f6a55',
+          mist: '#9db29e',
+          fog: '#d3e0d2',
+          bone: '#f4f0e4',
+          white: '#faf7ee',
+          ember: '#cf9d4f',
+          emberDeep: '#a97a34',
+          rust: '#c17a4a',
         },
       },
       fontFamily: {

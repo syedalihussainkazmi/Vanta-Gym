@@ -6,8 +6,8 @@ const base =
   'group relative inline-flex items-center gap-3 whitespace-nowrap font-mono text-[11px] uppercase tracking-widest2 transition-colors duration-500 ease-out focus-visible:outline-offset-4'
 
 const variants = {
-  solid: 'bg-vanta-white text-vanta-black px-8 py-4 hover:bg-vanta-ember hover:text-vanta-white',
-  outline: 'border border-vanta-fog/40 text-vanta-white px-8 py-4 hover:border-vanta-white',
+  solid: 'bg-vanta-white text-vanta-black px-8 py-4 hover:bg-vanta-ember hover:text-vanta-black',
+  outline: 'border border-vanta-fog/40 text-vanta-white px-8 py-4 hover:border-vanta-ember hover:text-vanta-ember',
   ghost: 'text-vanta-white px-0 py-2',
 }
 

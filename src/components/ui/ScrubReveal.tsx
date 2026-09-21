@@ -16,8 +16,8 @@ interface ScrubRevealProps {
 export function ScrubReveal({
   text,
   className,
-  dimColor = 'rgba(10,10,11,0.22)',
-  litColor = '#0a0a0b',
+  dimColor = 'rgba(16,35,26,0.22)',
+  litColor = '#10231a',
 }: ScrubRevealProps) {
   const ref = useRef<HTMLParagraphElement>(null)
   const reducedMotion = useReducedMotion()

@@ -12,15 +12,21 @@ membership presentation — rather than the generic hero → cards → pricing �
 ## Stack
 
 - **Vite + React 19 + TypeScript**
-- **Tailwind CSS** for styling (custom design tokens in `tailwind.config.ts`)
+- **Tailwind CSS** for styling (custom design tokens in `tailwind.config.ts`) — a warm
+  deep-forest-green / gold / cream palette (`vanta.black/charcoal/graphite` etc. in the
+  config), not a neutral black-and-white theme
 - **GSAP + ScrollTrigger** for scroll-driven storytelling (the Training section's
   pinned category switcher, scroll-scrubbed word reveals, parallax, clip-path image
-  reveals)
+  reveals, hover-scale on gallery images)
 - **Lenis** for smooth scrolling, integrated with GSAP's ticker/ScrollTrigger
 - **Fontsource** (self-hosted `Syne`, `Inter`, `JetBrains Mono` — latin subset only, no
   external font CDN request at runtime)
-- No React animation library beyond GSAP — this keeps the JS bundle lean (~131 KB
+- No React animation library beyond GSAP — this keeps the JS bundle lean (~132 KB
   gzipped) instead of also shipping Framer Motion.
+- Hand-drawn-style SVG line icons (`src/components/ui/GymIcons.tsx` — barbell,
+  kettlebell, dumbbell, pulse, bolt) and a pure-CSS ambient background system
+  (`AnimatedBackground`: slow-drifting blurred color fields + film grain) — no stock
+  clipart or raster decoration.
 
 ## Project structure
 
@@ -30,7 +36,8 @@ src/
     nav/            Navbar + full-screen animated mobile menu
     sections/        One file per page section (Hero, Philosophy, Space, Training, …)
     ui/              Reusable primitives: Button, Image, RevealText, RevealImage,
-                     RevealFade, ScrubReveal, SectionLabel
+                     RevealFade, ScrubReveal, SectionLabel, AnimatedBackground,
+                     GymIcons
     Footer.tsx
     SkipLink.tsx
   data/
@@ -101,6 +108,16 @@ concept form (see below).
   `.line-mask`) clips overflow silently instead of wrapping.
 - **Contact form**: client-side validation only, no backend. Submitting shows a
   simulated success state; nothing is stored or transmitted (stated in the UI).
+- **Hero-height content**: any hero element meant to be visible on page load (not on
+  later scroll) needs an explicit `start="top 100%"` on its `RevealFade`/`RevealText` —
+  the default `start` threshold (`top 90%`) can fail to fire for content sitting near
+  the bottom edge of the very first viewport, since the trigger condition isn't met yet
+  at `scrollY = 0`. See `Hero.tsx`'s discipline strip for the pattern.
+- **Ambient background**: `AnimatedBackground` (`src/components/ui/AnimatedBackground.tsx`)
+  is pure CSS (`transform`/`opacity` blurred radial gradients + an SVG film-grain
+  layer), frozen automatically by the global `prefers-reduced-motion` rule. It's used
+  with `mix-blend-screen` over photography (Hero, Final CTA) and directly on flat
+  color sections (Membership).
 
 ## QA performed
 

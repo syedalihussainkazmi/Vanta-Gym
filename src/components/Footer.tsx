@@ -1,4 +1,5 @@
 import { nav, contactDetails } from '@/data/content'
+import { RevealFade } from '@/components/ui/RevealFade'
 import { useSmoothScroll } from '@/lib/SmoothScroll'
 
 export function Footer() {
@@ -13,12 +14,12 @@ export function Footer() {
   return (
     <footer className="relative border-t border-vanta-steel/25 bg-vanta-black pb-10 pt-20 md:pt-28">
       <div className="container-vanta">
-        <div className="flex flex-col justify-between gap-14 md:flex-row">
+        <RevealFade className="flex flex-col justify-between gap-14 md:flex-row">
           <div>
             <a
               href="#top"
               onClick={(e) => handleClick(e, '#top')}
-              className="font-display text-3xl font-extrabold uppercase tracking-tight text-vanta-white md:text-4xl"
+              className="font-display text-3xl font-extrabold uppercase tracking-tight text-vanta-white transition-opacity duration-300 ease-out hover:opacity-70 md:text-4xl"
             >
               Vanta
             </a>
@@ -33,7 +34,7 @@ export function Footer() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className="font-mono text-xs uppercase tracking-widest2 text-vanta-fog transition-colors hover:text-vanta-white"
+                className="font-mono text-xs uppercase tracking-widest2 text-vanta-fog transition-colors duration-300 ease-out hover:text-vanta-white"
               >
                 {item.label}
               </a>
@@ -47,13 +48,13 @@ export function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="font-mono text-xs uppercase tracking-widest2 text-vanta-fog transition-colors hover:text-vanta-white"
+                className="font-mono text-xs uppercase tracking-widest2 text-vanta-fog transition-colors duration-300 ease-out hover:text-vanta-white"
               >
                 {s.label}
               </a>
             ))}
           </div>
-        </div>
+        </RevealFade>
 
         <div className="mt-20 flex flex-col-reverse items-start justify-between gap-4 border-t border-vanta-steel/20 pt-8 text-vanta-mist sm:flex-row sm:items-center">
           <p className="font-mono text-[10px] uppercase tracking-widest2">

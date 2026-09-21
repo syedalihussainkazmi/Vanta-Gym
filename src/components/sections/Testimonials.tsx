@@ -68,7 +68,7 @@ export function Testimonials() {
               type="button"
               onClick={() => go(index - 1)}
               aria-label="Previous member story"
-              className="font-mono text-xs uppercase tracking-widest2 text-vanta-black/65 transition-colors hover:text-vanta-black"
+              className="font-mono text-xs uppercase tracking-widest2 text-vanta-black/65 transition-colors duration-300 ease-out hover:text-vanta-black"
             >
               ← Prev
             </button>
@@ -91,7 +91,7 @@ export function Testimonials() {
               type="button"
               onClick={() => go(index + 1)}
               aria-label="Next member story"
-              className="font-mono text-xs uppercase tracking-widest2 text-vanta-black/65 transition-colors hover:text-vanta-black"
+              className="font-mono text-xs uppercase tracking-widest2 text-vanta-black/65 transition-colors duration-300 ease-out hover:text-vanta-black"
             >
               Next →
             </button>

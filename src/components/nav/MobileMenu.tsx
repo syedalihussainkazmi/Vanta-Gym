@@ -79,7 +79,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                 e.preventDefault()
                 handleClick(item.href)
               }}
-              className="font-display text-4xl font-bold text-vanta-white"
+              className="font-display text-4xl font-bold text-vanta-white transition-opacity duration-300 ease-out hover:opacity-70"
             >
               {item.label}
             </a>
@@ -92,7 +92,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               e.preventDefault()
               handleClick('#membership')
             }}
-            className="font-mono text-sm uppercase tracking-widest2 text-vanta-ember"
+            className="font-mono text-sm uppercase tracking-widest2 text-vanta-ember transition-opacity duration-300 ease-out hover:opacity-70"
           >
             Join Vanta →
           </a>
@@ -103,7 +103,13 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         <span>{contactDetails.email}</span>
         <div className="flex gap-6">
           {contactDetails.socials.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="hover:text-vanta-white">
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors duration-300 ease-out hover:text-vanta-white"
+            >
               {s.label}
             </a>
           ))}

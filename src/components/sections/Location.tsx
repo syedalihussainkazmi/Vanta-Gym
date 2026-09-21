@@ -31,10 +31,16 @@ export function Location() {
             </address>
 
             <div className="mt-10 flex flex-col gap-2 font-sans text-vanta-fog">
-              <a href={`mailto:${contactDetails.email}`} className="w-fit hover:text-vanta-white">
+              <a
+                href={`mailto:${contactDetails.email}`}
+                className="w-fit transition-colors duration-300 ease-out hover:text-vanta-white"
+              >
                 {contactDetails.email}
               </a>
-              <a href={`tel:${contactDetails.phone.replace(/[^+\d]/g, '')}`} className="w-fit hover:text-vanta-white">
+              <a
+                href={`tel:${contactDetails.phone.replace(/[^+\d]/g, '')}`}
+                className="w-fit transition-colors duration-300 ease-out hover:text-vanta-white"
+              >
                 {contactDetails.phone}
               </a>
             </div>
@@ -50,7 +56,13 @@ export function Location() {
 
             <div className="mt-10 flex gap-6 font-mono text-[11px] uppercase tracking-widest2 text-vanta-fog">
               {contactDetails.socials.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="hover:text-vanta-white">
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors duration-300 ease-out hover:text-vanta-white"
+                >
                   {s.label}
                 </a>
               ))}

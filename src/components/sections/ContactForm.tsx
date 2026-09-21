@@ -1,7 +1,9 @@
-import { useEffect, useId, useState, type FormEvent } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import clsx from 'clsx'
 import { useMembershipInterest } from '@/lib/MembershipInterest'
 import { Button } from '@/components/ui/Button'
+import { gsap } from '@/lib/gsap'
+import { useReducedMotion } from '@/lib/useReducedMotion'
 
 interface FormState {
   name: string
@@ -23,7 +25,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function inputClasses(hasError: boolean) {
   return clsx(
-    'w-full border-b bg-transparent py-3 font-sans text-vanta-white placeholder:text-vanta-mist focus-visible:outline-none',
+    'w-full border-b bg-transparent py-3 font-sans text-vanta-white placeholder:text-vanta-mist transition-colors duration-300 ease-out focus-visible:outline-none',
     hasError ? 'border-vanta-ember' : 'border-vanta-steel/50 focus:border-vanta-white',
   )
 }
@@ -40,12 +42,23 @@ export function ContactForm() {
   const [errors, setErrors] = useState<FormErrors>({})
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle')
   const idPrefix = useId()
+  const successRef = useRef<HTMLDivElement>(null)
+  const reducedMotion = useReducedMotion()
 
   useEffect(() => {
     if (interest && INTEREST_OPTIONS.includes(interest)) {
       setForm((f) => ({ ...f, interest }))
     }
   }, [interest])
+
+  useEffect(() => {
+    if (status !== 'success' || reducedMotion || !successRef.current) return
+    gsap.fromTo(
+      successRef.current,
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+    )
+  }, [status, reducedMotion])
 
   const validate = (values: FormState): FormErrors => {
     const next: FormErrors = {}
@@ -71,7 +84,11 @@ export function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div role="status" className="flex min-h-[420px] flex-col justify-center border border-vanta-steel/30 p-10">
+      <div
+        ref={successRef}
+        role="status"
+        className="flex min-h-[420px] flex-col justify-center border border-vanta-steel/30 p-10"
+      >
         <span className="font-mono text-[11px] uppercase tracking-widest2 text-vanta-mist">Message received</span>
         <p className="mt-4 max-w-sm font-display text-2xl font-bold uppercase leading-tight text-vanta-white">
           We'll be in touch within one business day.
@@ -79,7 +96,7 @@ export function ContactForm() {
         <button
           type="button"
           onClick={() => setStatus('idle')}
-          className="mt-8 self-start font-mono text-[11px] uppercase tracking-widest2 text-vanta-fog underline decoration-vanta-steel underline-offset-4 hover:text-vanta-white"
+          className="mt-8 self-start font-mono text-[11px] uppercase tracking-widest2 text-vanta-fog underline decoration-vanta-steel underline-offset-4 transition-colors duration-300 ease-out hover:text-vanta-white"
         >
           Send another message
         </button>
@@ -163,7 +180,7 @@ export function ContactForm() {
             name="interest"
             value={form.interest}
             onChange={(e) => setForm((f) => ({ ...f, interest: e.target.value }))}
-            className="w-full border-b border-vanta-steel/50 bg-transparent py-3 font-sans text-vanta-white focus:border-vanta-white focus-visible:outline-none"
+            className="w-full border-b border-vanta-steel/50 bg-transparent py-3 font-sans text-vanta-white transition-colors duration-300 ease-out focus:border-vanta-white focus-visible:outline-none"
           >
             {INTEREST_OPTIONS.map((opt) => (
               <option key={opt} value={opt} className="bg-vanta-charcoal">

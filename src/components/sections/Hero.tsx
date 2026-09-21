@@ -83,19 +83,21 @@ export function Hero() {
             <RevealText lines={['Forged', 'In Motion.']} delay={0.75} stagger={0.12} />
           </h1>
 
-          <div className="mt-8 flex flex-col items-start justify-between gap-8 md:mt-10 md:flex-row md:items-end">
-            <p className="max-w-md text-balance font-sans text-base text-vanta-fog md:text-lg">
-              A performance club built for strength, conditioning, and recovery. No shortcuts.
-              Train with intent.
-            </p>
-            <Button
-              onClick={() => scrollTo('#philosophy')}
-              variant="solid"
-              className="shrink-0"
-            >
-              Enter Vanta
-            </Button>
-          </div>
+          <RevealFade delay={1.05} start="top 100%" className="mt-8 md:mt-10">
+            <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+              <p className="max-w-md text-balance font-sans text-base text-vanta-fog md:text-lg">
+                A performance club built for strength, conditioning, and recovery. No shortcuts.
+                Train with intent.
+              </p>
+              <Button
+                onClick={() => scrollTo('#philosophy')}
+                variant="solid"
+                className="shrink-0"
+              >
+                Enter Vanta
+              </Button>
+            </div>
+          </RevealFade>
         </div>
 
         <RevealFade delay={0.9} start="top 100%">

@@ -44,7 +44,7 @@ export function ScrubReveal({
           trigger: el,
           start: 'top 78%',
           end: 'bottom 45%',
-          scrub: 0.4,
+          scrub: 0.6,
         },
       })
     }, el)

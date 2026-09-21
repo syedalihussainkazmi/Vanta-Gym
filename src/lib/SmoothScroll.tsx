@@ -32,10 +32,10 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     if (reducedMotion) return
 
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t: number) => 1 - Math.pow(1 - t, 4),
+      duration: 1.35,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1,
+      wheelMultiplier: 0.9,
       touchMultiplier: 1.15,
     })
     lenisRef.current = lenis
@@ -57,7 +57,11 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     () => ({
       scrollTo: (target, options) => {
         if (lenisRef.current) {
-          lenisRef.current.scrollTo(target, { offset: options?.offset ?? 0, duration: 1.4 })
+          lenisRef.current.scrollTo(target, {
+            offset: options?.offset ?? 0,
+            duration: 1.6,
+            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          })
         } else if (typeof target === 'string') {
           document.querySelector(target)?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })
         }

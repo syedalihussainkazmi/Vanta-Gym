@@ -68,7 +68,7 @@ export function RevealImage({
             trigger: outer,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 0.6,
+            scrub: 0.9,
           },
         })
       }

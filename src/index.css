@@ -1,0 +1,176 @@
+@import '@fontsource/syne/latin-600.css';
+@import '@fontsource/syne/latin-700.css';
+@import '@fontsource/syne/latin-800.css';
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/jetbrains-mono/latin-400.css';
+@import '@fontsource/jetbrains-mono/latin-500.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #0a0a0b;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+body {
+  margin: 0;
+  background-color: #0a0a0b;
+  color: #faf9f6;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#root {
+  overflow-x: clip;
+}
+
+::selection {
+  background: #faf9f6;
+  color: #0a0a0b;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Focus visibility for keyboard users only */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 4px rgba(10, 10, 11, 0.35);
+}
+
+/* Scrollbar (webkit) — restrained, on-brand */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0b;
+}
+::-webkit-scrollbar-thumb {
+  background: #3d3d41;
+  border: 2px solid #0a0a0b;
+  border-radius: 8px;
+}
+
+/* Utility: mask-reveal for text lines (used with JS-driven transforms) */
+.line-mask {
+  overflow: hidden;
+  display: block;
+}
+
+/* Custom cursor (desktop, fine-pointer only, motion allowed) */
+.vanta-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  margin-top: -7px;
+  border-radius: 999px;
+  background: #faf9f6;
+  pointer-events: none;
+  z-index: 200;
+  mix-blend-mode: difference;
+  opacity: 0;
+  will-change: transform;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease-out;
+}
+
+.vanta-cursor.is-active {
+  opacity: 1;
+}
+
+.vanta-cursor-label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 200;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0a0a0b;
+  opacity: 0;
+  will-change: transform, opacity, width, height;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .vanta-cursor,
+  .vanta-cursor-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.container-vanta {
+  width: 100%;
+  max-width: 1680px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 4rem);
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scroll-cue-line {
+  animation: scroll-cue 1.8s cubic-bezier(0.65, 0, 0.15, 1) infinite;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px #faf9f6;
+  color: transparent;
+}
+
+@media (max-width: 767px) {
+  .text-outline {
+    -webkit-text-stroke: 0.6px #faf9f6;
+  }
+}

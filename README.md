@@ -87,6 +87,20 @@ npm run preview     # serve the production build locally
 No environment variables or backend are required — the contact form is a frontend-only
 concept form (see below).
 
+`vite.config.ts` sets `base: './'` so the build emits relative asset paths
+(`./assets/...`) instead of root-absolute ones (`/assets/...`). Root-absolute
+paths break entirely on any static host that serves the site from a subpath
+(e.g. a GitHub Pages project site at `/repo-name/`, or a preview link under a
+sub-route) — every script/style 404s and the page loads with no JS at all, so
+nothing (preloader, animations, anything) runs. Relative paths work at both
+the domain root and a subpath. **Opening `dist/index.html` directly from the
+filesystem (`file://…`) will still never work** — browsers block ES module
+`<script type="module">` loads under the `file://` origin via CORS
+regardless of the path being correct; this is a browser security
+restriction, not something fixable through Vite config. Always view the site
+through a server: `npm run dev`, `npm run preview`, or an actual static-host
+deployment.
+
 ## Notable implementation details
 
 - **Photography**: images are hotlinked from `images.unsplash.com` by photo ID (see

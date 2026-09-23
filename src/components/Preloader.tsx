@@ -24,22 +24,18 @@ export function Preloader({ onReveal }: PreloaderProps) {
   const percentRef = useRef<HTMLSpanElement>(null)
   const revealedRef = useRef(false)
   const onRevealRef = useRef(onReveal)
-  const startedRef = useRef(false)
 
   useEffect(() => {
     onRevealRef.current = onReveal
   }, [onReveal])
 
   useEffect(() => {
-    // Guards against ever running the timer twice — this effect must fire
-    // exactly once per page load, regardless of how many times it's
-    // re-invoked (StrictMode's dev-only double-invoke, or any future
-    // dependency change): a second run would restart a fresh five-second
-    // countdown that eventually animates refs from a preloader instance
-    // that has already dissolved and unmounted.
-    if (startedRef.current) return
-    startedRef.current = true
-
+    // This effect must fully undo its own setup in its cleanup so it's
+    // safe to run more than once — React StrictMode intentionally runs
+    // dev-only mount -> cleanup -> mount once on load to catch effects
+    // that aren't idempotent. `revealedRef` still guards `onReveal` itself
+    // against ever firing twice (see below), so a StrictMode replay just
+    // cancels the first (never-fired) rAF and starts a clean one.
     if (reducedMotion) {
       onRevealRef.current()
       setFinished(true)

@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { SmoothScrollProvider } from '@/lib/SmoothScroll'
 import { CursorProvider } from '@/lib/Cursor'
 import { MembershipInterestProvider } from '@/lib/MembershipInterest'
 import { SkipLink } from '@/components/SkipLink'
+import { Preloader } from '@/components/Preloader'
 import { Navbar } from '@/components/nav/Navbar'
 import { Hero } from '@/components/sections/Hero'
 import { Philosophy } from '@/components/sections/Philosophy'
@@ -17,14 +19,17 @@ import { FinalCta } from '@/components/sections/FinalCta'
 import { Footer } from '@/components/Footer'
 
 function App() {
+  const [heroReady, setHeroReady] = useState(false)
+
   return (
     <SmoothScrollProvider>
       <CursorProvider>
         <MembershipInterestProvider>
+          <Preloader onReveal={() => setHeroReady(true)} />
           <SkipLink />
           <Navbar />
           <main id="top-content" tabIndex={-1} className="focus:outline-none">
-            <Hero />
+            <Hero ready={heroReady} />
             <Philosophy />
             <Space />
             <Training />

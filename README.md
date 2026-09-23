@@ -27,6 +27,11 @@ membership presentation — rather than the generic hero → cards → pricing �
   kettlebell, dumbbell, pulse, bolt) and a pure-CSS ambient background system
   (`AnimatedBackground`: slow-drifting blurred color fields + film grain) — no stock
   clipart or raster decoration.
+- A five-second brand `Preloader` (`src/components/Preloader.tsx`) — a circular
+  progress ring around a pulsing mark — that dissolves into the hero rather than
+  cutting to it; the hero's own entrance (headline, subtext, discipline strip) is
+  gated behind the preloader finishing, so it plays as the page appears instead of
+  silently finishing behind the loader.
 
 ## Project structure
 
@@ -39,6 +44,7 @@ src/
                      RevealFade, ScrubReveal, SectionLabel, AnimatedBackground,
                      GymIcons
     Footer.tsx
+    Preloader.tsx
     SkipLink.tsx
   data/
     content.ts        All copy/content: nav, coaches, testimonials, membership tiers,
@@ -118,6 +124,20 @@ concept form (see below).
   layer), frozen automatically by the global `prefers-reduced-motion` rule. It's used
   with `mix-blend-screen` over photography (Hero, Final CTA) and directly on flat
   color sections (Membership).
+- **Preloader → Hero handoff**: `App.tsx` holds a `heroReady` flag, flipped by
+  `Preloader`'s `onReveal` callback partway through its own exit fade (not after it
+  fully finishes), so the hero's entrance overlaps the preloader dissolving rather
+  than waiting for a hard cut. `Hero` only mounts its `RevealText`/`RevealFade`
+  content once `ready` is true — mounting it unconditionally on page load would let it
+  finish its animation invisibly behind the preloader before anyone sees it.
+  `Preloader`'s own timer effect intentionally depends on `[reducedMotion]` only
+  (never on `onReveal`, and it's called through a ref, `onRevealRef.current()`) plus a
+  `startedRef` guard against ever running twice: calling `onReveal()` causes `App` to
+  re-render with a new inline callback, and if that callback were a dependency, React
+  would tear down and restart the whole five-second timer from a fresh
+  `performance.now()` — the restarted timer would eventually fire GSAP tweens against
+  refs from a preloader instance that already dissolved and unmounted (a real "GSAP
+  target null" bug caught during QA, not a hypothetical).
 
 ## QA performed
 
@@ -129,3 +149,13 @@ concept form (see below).
 - A systematic scan of every headline's rendered width against its container caught
   and fixed several real overflow/clipping bugs (see type-scale note above) before
   this was considered done.
+- Preloader-specific: stack-traced a console warning (via the unminified dev build)
+  back to a real retrigger bug in the preloader's timer effect (see the
+  "Preloader → Hero handoff" note above) rather than dismissing it as test noise;
+  confirmed the fix across repeated runs of a realistic interaction path (switch a
+  Training category, then navigate to another section) that reliably reproduced it
+  before the fix and never reproduces it after.
+- Re-verified the hero's bottom row (scroll cue + discipline tags) for overlap across
+  a matrix of viewport heights (650–1080px) after combining them into one flex row —
+  a taller hero (headline + preloader-gated cascade) made two independently
+  bottom-anchored elements collide when they weren't in the same row.

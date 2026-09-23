@@ -160,18 +160,28 @@ button {
   padding-inline: clamp(1.25rem, 5vw, 4rem);
 }
 
-@keyframes scroll-cue {
+/* Bottom-left scroll cue: dot sliding + fading inside a mouse outline */
+@keyframes vanta-scroll-dot {
   0% {
-    transform: translateY(-100%);
+    transform: translateY(0);
+    opacity: 1;
   }
-  60%,
+  60% {
+    transform: translateY(13px);
+    opacity: 0;
+  }
+  61% {
+    transform: translateY(0);
+    opacity: 0;
+  }
   100% {
-    transform: translateY(100%);
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
-.scroll-cue-line {
-  animation: scroll-cue 1.8s cubic-bezier(0.65, 0, 0.15, 1) infinite;
+.vanta-scroll-dot {
+  animation: vanta-scroll-dot 2s cubic-bezier(0.65, 0, 0.15, 1) infinite;
 }
 
 .text-outline {
@@ -336,4 +346,69 @@ button {
   100% {
     transform: translate(0, 0);
   }
+}
+
+/* Preloader: slow rotating dashed ring + pulsing brand mark */
+@keyframes vanta-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vanta-spin-slow {
+  animation: vanta-spin-slow 12s linear infinite;
+}
+
+@keyframes vanta-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.85;
+  }
+}
+
+.vanta-pulse {
+  animation: vanta-pulse 2.2s ease-in-out infinite;
+}
+
+/* Hero motion graphic: a point of light travelling along the barbell bar */
+@keyframes vanta-travel {
+  0% {
+    left: 14%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 84%;
+    opacity: 0;
+  }
+}
+
+.vanta-travel-dot {
+  animation: vanta-travel 3.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Hero motion graphic: a continuously drawing pulse/EKG line */
+@keyframes vanta-draw-line {
+  0% {
+    stroke-dashoffset: 140;
+  }
+  60%,
+  100% {
+    stroke-dashoffset: -140;
+  }
+}
+
+.vanta-draw-line {
+  stroke-dasharray: 70 140;
+  animation: vanta-draw-line 3.2s linear infinite;
 }

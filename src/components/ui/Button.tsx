@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { useCursor } from '@/lib/Cursor'
 
 const base =
-  'group relative inline-flex items-center gap-3 whitespace-nowrap font-mono text-[11px] uppercase tracking-widest2 transition-colors duration-500 ease-out focus-visible:outline-offset-4'
+  'group relative inline-flex items-center gap-3 whitespace-nowrap font-mono text-[11px] uppercase tracking-widest2 transition duration-300 ease-out hover:scale-[1.03] active:scale-[0.97] focus-visible:outline-offset-4'
 
 const variants = {
   solid: 'bg-vanta-white text-vanta-black px-8 py-4 hover:bg-vanta-ember hover:text-vanta-black',

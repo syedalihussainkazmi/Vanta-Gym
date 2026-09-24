@@ -187,6 +187,11 @@ button {
 .text-outline {
   -webkit-text-stroke: 1px var(--vanta-white);
   color: transparent;
+  /* Outline-only glyphs have no fill of their own, so a bright patch of
+     whatever photo sits behind them (sky, window glass, studio light) can
+     wash the stroke out to near-invisible. A dark halo around each stroke
+     keeps them legible regardless of what's behind them. */
+  filter: drop-shadow(0 1px 2px rgba(8, 15, 11, 0.85)) drop-shadow(0 0 10px rgba(8, 15, 11, 0.6));
 }
 
 @media (max-width: 767px) {

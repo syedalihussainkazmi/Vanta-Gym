@@ -27,6 +27,11 @@ export function Performance() {
           parallaxAmount={90}
         />
 
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-vanta-black/85 via-vanta-black/40 to-transparent"
+        />
+
         <div className="container-vanta absolute inset-0 flex items-end pb-10 md:pb-16">
           <div className="grid w-full grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
             {performancePillars.map((pillar, i) => (

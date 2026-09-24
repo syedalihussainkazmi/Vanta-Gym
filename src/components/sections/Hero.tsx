@@ -75,21 +75,6 @@ export function Hero({ ready }: HeroProps) {
       <div ref={decorRef} className="absolute inset-0 z-[11] opacity-0">
         <AnimatedBackground className="mix-blend-screen opacity-70" />
 
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute right-[6%] top-32 z-[12] hidden md:top-36 md:block"
-        >
-          <div className="vanta-float-a relative -rotate-12 text-vanta-ember/25">
-            <BarbellIcon className="w-40 lg:w-56" />
-            <span className="vanta-travel-dot absolute top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-vanta-ember shadow-[0_0_8px_2px_rgba(207,157,79,0.6)]" />
-          </div>
-        </div>
-
-        <KettlebellIcon
-          aria-hidden="true"
-          className="vanta-float-c pointer-events-none absolute left-[7%] top-28 z-[12] hidden w-10 text-vanta-fog/20 md:top-32 md:block"
-        />
-
         <svg
           aria-hidden="true"
           viewBox="0 0 200 60"
